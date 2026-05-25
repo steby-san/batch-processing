@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: batch-processing
+
+  # Cấu hình MySQL Database
+  datasource:
+    url: jdbc:mysql://localhost:3306/batch_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: rootpassword
+
+  jpa:
+    hibernate:
+      ddl-auto: update 
+    show-sql: false
+
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+
+aws:
+  s3:
+    bucket-name: my-batch-bucket
+    region: ap-southeast-1
+    access-key: ${AWS_ACCESS_KEY_ID:test}
+    secret-key: ${AWS_SECRET_ACCESS_KEY:test}
+    endpoint: http://localhost:4566 # Dùng local để test 
