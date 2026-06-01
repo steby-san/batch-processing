@@ -1,8 +1,16 @@
 package com.example.batch_processing.service;
 
-import org.springframework.stereotype.Service;
+import java.io.File;
+import java.util.List;
 
-@Service
-public class S3Service {
-    // TODO: Implement
+public interface S3Service {
+
+    List<String> getPendingFiles();
+
+    void moveFile(
+            String sourceKey,
+            String destinationKey
+    );
+
+    File downloadFile(String key);
 }
