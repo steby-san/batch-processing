@@ -1,5 +1,6 @@
 package com.example.batch_processing.service;
 
+import java.io.File;
 import java.util.List;
 
 public interface S3Service {
@@ -10,4 +11,6 @@ public interface S3Service {
             String sourceKey,
             String destinationKey
     );
+
+    File downloadFile(String key);
 }

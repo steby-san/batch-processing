@@ -13,4 +13,11 @@ public interface RawEmployeeRepository
     long countByDepartment(String department);
 
     boolean existsByEmpCode(String empCode);
+
+    @org.springframework.data.jpa.repository.Query("""
+            SELECT e.department AS department, COUNT(e) AS employeeCount
+            FROM RawEmployee e
+            GROUP BY e.department
+            """)
+    List<com.example.batch_processing.projection.HrReportProjection> getHrReport();
 }

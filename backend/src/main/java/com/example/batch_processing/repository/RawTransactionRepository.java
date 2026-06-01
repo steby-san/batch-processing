@@ -42,4 +42,15 @@ public interface RawTransactionRepository
             @Param("start") LocalDateTime start,
             @Param("end") LocalDateTime end
     );
+
+    @Query(value = """
+            SELECT 
+                DATE_FORMAT(t.created_at, '%Y-%m') AS month,
+                SUM(t.amount) AS revenue,
+                COUNT(t.id) AS transactionCount
+            FROM batch_processing_db.raw_transaction t
+            GROUP BY DATE_FORMAT(t.created_at, '%Y-%m')
+            ORDER BY month DESC
+            """, nativeQuery = true)
+    List<com.example.batch_processing.projection.FinanceReportProjection> getFinanceReport();
 }
